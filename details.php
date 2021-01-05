@@ -145,6 +145,8 @@ if(isset($_POST['submit']))
 }
 
 ?>
-
+ <div class="footer">
+        <p><strong>&copy;2021 GRIP@The Sparks Foundation | Developed By Arockiaselcia A</strong></p>
+      </div>
 </body>
 </html>
