@@ -1,0 +1,43 @@
+nav {
+    color:rgba(245, 240, 240, 0.952);
+    background: #512DA8;
+}
+
+.navbar-brand {
+    color:#fff;
+}
+
+
+ul li{
+    
+	display:inline-block;
+	line-height:80px;
+	margin :0 5px;
+	margin-top:-15px;
+}
+
+ul li a{
+	
+	color:white;
+	font-size:17px;
+	padding :7px 13px;
+    border-radius:3px;
+    background-color: rgb(247, 6, 175);
+	text-transform: uppercase;
+	margin-top: 2px;
+}
+
+.container-fluid {
+	height:50px;
+	
+}
+
+.container-fluid a{
+	margin-top:-2%;
+}
+
+
+.jumbotron {
+	background-color:rgb(133, 132, 214);
+}
+
