@@ -41,3 +41,12 @@ ul li a{
 	background-color:rgb(133, 132, 214);
 }
 
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #512DA8;
+	color: white;
+	text-align: center;
+ }
