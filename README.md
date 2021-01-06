@@ -13,6 +13,6 @@ This  application is a part of The Spark Foundation Graduate Rotational Internsh
    ◇ No Login Page. No User Creation. Only transfer of credit between multiple users.
    ◇ Host the website at 000webhost, github.io, heroku app or any other free hosting provider. Check in code in gitlab.
 
-## The working app is deployed on heroku. ##Link: https://basic-banking-system13.herokuapp.com/home.html
+##The working app is deployed on heroku. ##Link: https://basic-banking-system13.herokuapp.com/home.html
 
  
