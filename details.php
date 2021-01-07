@@ -110,26 +110,54 @@ if(isset($_POST['submit']))
   $from = "SELECT * FROM customer_details WHERE id=$id";
   $fquery = mysqli_connect($con,$from);
   $ff = mysqli_fetch_array($fquery);
-  $bal = $ff['balance'];
+  $bal = $ff["balance"];
   
-  // $to = "SELECT * FROM customer_details WHERE id=$name";
-  // $tquery = mysqli_connect($con,$to);
-  // $tt = mysqli_fetch_array($tquery);
   if(($balance) < 0)
   {
+    ?>
+    <div class="alert alert-danger alert-dismissible" id="alert">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Oops!</strong> Please enter a correct value...
+    </div>
+   
+    <script type="text/javascript"> 
+          setTimeout(function () { 
 
-    echo '<script>';
-    echo ' alert("Please enter correct amount.")';  // showing an alert box.
-    echo '</script>';
+             // Closing the alert 
+              $('#alert').alert('close'); 
+          }, 5000); 
+         
+           
+         
+       
+      </script> 
+     
+     
+    <?php
   }
   else if(($balance) == 0)
-  {
-    echo "<script>";
-    echo "alert('Oops! Zero value cannot be transferred')";
-    echo "</script>";
+  {     ?>
+    <div class="alert alert-danger alert-dismissible" id="alert">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Oops!</strong> Enter more than zero...
+    </div>
+   
+    <script type="text/javascript"> 
+          setTimeout(function () { 
+
+             // Closing the alert 
+              $('#alert').alert('close'); 
+          }, 5000); 
+         
+           
+         
+       
+      </script> 
+     
+     
+    <?php
+     
   }
-
-
 
   else 
   {
@@ -193,6 +221,10 @@ if(isset($_POST['submit']))
      
     }
   }
+
+
+
+  
 }
 
 ?>
