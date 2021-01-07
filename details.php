@@ -101,70 +101,104 @@ if(mysqli_num_rows($res)>0)
 error_reporting(E_ERROR | E_PARSE);
 //$con = mysqli_connect("localhost","root","","credit");
 $con = mysqli_connect("remotemysql.com","6FT4fQOdDH","LtaCGyjKpO","6FT4fQOdDH");//remote database
-$id = $_GET['id'];
+
 if(isset($_POST['submit']))
 {
+  $id = $_GET['id'];
   $name = $_POST["name"];
   $balance = $_POST["balance"];
-  $query = "UPDATE customer_details SET balance=balance+$balance WHERE id=$name and (SELECT balance FROM customer_details WHERE id=$id)>$balance ";
-  $q = "UPDATE customer_details SET balance=balance-$balance WHERE id=$id  AND balance>$balance"; 
-  $result = mysqli_query($con,$query);
-  $res = mysqli_query($con,$q);
-  if($result and $res)
+  $from = "SELECT * FROM customer_details WHERE id=$id";
+  $fquery = mysqli_connect($con,$from);
+  $ff = mysqli_fetch_array($fquery);
+  $bal = $ff['balance'];
+  
+  // $to = "SELECT * FROM customer_details WHERE id=$name";
+  // $tquery = mysqli_connect($con,$to);
+  // $tt = mysqli_fetch_array($tquery);
+  if(($balance) < 0)
   {
-    
-   ?>
+
+    echo '<script>';
+    echo ' alert("Please enter correct amount.")';  // showing an alert box.
+    echo '</script>';
+  }
+  else if(($balance) == 0)
+  {
+    echo "<script>";
+    echo "alert('Oops! Zero value cannot be transferred')";
+    echo "</script>";
+  }
+
+
+
+  else 
+  {
+    $sql = "SELECT * FROM customer_details WHERE id=$name";
+    $qu = mysqli_query($con,$sql);
+    $sql2 = mysqli_fetch_array($qu);
+    $q = "UPDATE customer_details SET balance=balance-$balance WHERE id=$id";
+    $result = mysqli_query($con,$q);
+    $query = "UPDATE customer_details SET balance=balance+$balance WHERE id=$name";
+    $res = mysqli_query($con,$query);
+    if($result and $res)
+    {
+      
+     
+     ?>
     <div class="alert alert-success alert-dismissible" id="alert">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Success!</strong> The Credit has been transfered successfully.
-  </div>
-  
-  <script type="text/javascript"> 
-        setTimeout(function () { 
-  
-            // Closing the alert 
-            $('#alert').alert('close'); 
-        }, 8000); 
-        
-          location.replace("customer.php");
-        
-      
-    </script> 
-    
-    
-  <?php
-    
-    
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Success!</strong> The Credit has been transfered successfully.
+    </div>
+   
+    <script type="text/javascript"> 
+          setTimeout(function () { 
+
+             // Closing the alert 
+              $('#alert').alert('close'); 
+          }, 8000); 
+         
+            location.replace("customer.php");
+         
+       
+      </script> 
+     
+     
+    <?php
+     
+     
+    }
+    else
+    {
+      ?>
+      <div class="alert alert-danger alert-dismissible" id="alert">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong> Danger! </strong>Transaction Failed....
+    </div>
+   
+    <script type="text/javascript"> 
+          setTimeout(function () { 
+   
+              // Closing the alert 
+              $('#alert').alert('close'); 
+          }, 8000); 
+         
+            location.replace("customer.php");
+         
+       
+      </script> 
+     
+     
+    <?php
+     
+     
+    }
   }
-  else
-  {
-    ?>
-    <div class="alert alert-danger alert-dismissible" id="alert">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong> Danger! </strong>Transaction Failed....
-  </div>
-  
-  <script type="text/javascript"> 
-        setTimeout(function () { 
-  
-            // Closing the alert 
-            $('#alert').alert('close'); 
-        }, 8000); 
-        
-          location.replace("customer.php");
-        
-      
-    </script> 
-    
-    
-  <?php
-  }
-  
 }
 
 ?>
  <div class="footer">
         <p><strong>&copy;2021 GRIP@The Sparks Foundation | Developed By Arockiaselcia A</strong></p>
       </div>
+
 </body>
 </html>
