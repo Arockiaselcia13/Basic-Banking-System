@@ -106,12 +106,11 @@ if(isset($_POST['submit']))
 {
   $name = $_POST["name"];
   $balance = $_POST["balance"];
-  $query = "UPDATE customer_details SET balance=balance+$balance WHERE id=$name ";
-  $q = "UPDATE customer_details SET balance=balance-$balance WHERE id=$id ";
-  
+  $query = "UPDATE customer_details SET balance=balance+$balance WHERE id=$name and (SELECT balance FROM customer_details WHERE id=$id)>$balance ";
+  $q = "UPDATE customer_details SET balance=balance-$balance WHERE id=$id  AND balance>$balance"; 
   $result = mysqli_query($con,$query);
   $res = mysqli_query($con,$q);
-  if($result)
+  if($result and $res)
   {
     
    ?>
@@ -139,7 +138,26 @@ if(isset($_POST['submit']))
   }
   else
   {
-    echo '<script> alert("Failed")</script>';
+    ?>
+    <div class="alert alert-danger alert-dismissible" id="alert">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong> Danger! </strong>Transaction Failed....
+  </div>
+  
+  <script type="text/javascript"> 
+        setTimeout(function () { 
+  
+            // Closing the alert 
+            $('#alert').alert('close'); 
+        }, 8000); 
+        
+          location.replace("customer.php");
+        
+      
+    </script> 
+    
+    
+  <?php
   }
   
 }
