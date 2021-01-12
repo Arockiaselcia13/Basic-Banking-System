@@ -108,7 +108,7 @@ if(isset($_POST['submit']))
   $name = $_POST["name"];
   $balance = $_POST["balance"];
   $from = "SELECT * FROM customer_details WHERE id=$id";
-  $fquery = mysqli_connect($con,$from);
+  $fquery = mysqli_query($con,$from);
   $ff = mysqli_fetch_array($fquery);
   $bal = $ff["balance"];
   
@@ -157,6 +157,29 @@ if(isset($_POST['submit']))
      
     <?php
      
+  }
+  else if(($balance >$bal))
+  {
+    ?>
+    <div class="alert alert-danger alert-dismissible" id="alert">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Oops!</strong> insufficient balance...
+    </div>
+   
+    <script type="text/javascript"> 
+          setTimeout(function () { 
+
+             // Closing the alert 
+              $('#alert').alert('close'); 
+          }, 5000); 
+         
+           
+         
+       
+      </script> 
+     
+     
+    <?php
   }
 
   else 
